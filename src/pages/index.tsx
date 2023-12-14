@@ -28,8 +28,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <p>The date on the server : {serverNow?.toLocaleString() ?? ""}</p>
-        <p>The date on the client : {clientNow?.toLocaleString() ?? ""}</p>
+        <p>Z means UTC</p>
+        <p>The date on the server : {serverNow?.toString() ?? ""}</p>
+        <p>The date on the client : {clientNow?.toString() ?? ""}</p>
       </main>
     </>
   );
