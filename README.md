@@ -1,0 +1,1 @@
+# next.js-server-fake-day-of-week-for-e2e
