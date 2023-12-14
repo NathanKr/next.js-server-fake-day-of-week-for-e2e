@@ -24,3 +24,12 @@ How to do it elegantly?
 My Setup :
 My application is a next.js application with a page router.
 My e2e test is using puppeteer and vitest
+
+
+<h2>Points of interest</h2>
+<ul>
+<li>sinon</li>
+<li>api</li>
+<li>test env variable</li>
+<li>instrumentation.ts</li>
+</ul>
