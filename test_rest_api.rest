@@ -1,0 +1,16 @@
+POST http://localhost:3000/api/e2e-fake-server-time 
+Content-Type: application/json
+
+{
+    
+    "serverFakeTimeMs" : 1702458733000
+}
+
+###
+POST http://localhost:3000/api/e2e-fake-server-time 
+Content-Type: application/json
+
+{
+    
+    "serverFakeTimeMs" : 1702549920000
+}

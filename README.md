@@ -31,5 +31,4 @@ My e2e test is using puppeteer and vitest
 <li>sinon</li>
 <li>api</li>
 <li>test env variable</li>
-<li>instrumentation.ts</li>
 </ul>

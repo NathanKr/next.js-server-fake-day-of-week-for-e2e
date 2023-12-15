@@ -1,23 +1,24 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import axios from 'axios'
+import axios from "axios";
+import InternalRelativeApi from "@/types/e-internal-relative-api";
+import IServerInfo from "@/types/i-server-info";
 
 export default function Home() {
   const [clientNow, setClientNow] = useState<Date>();
-  const [serverNow, setServerNow] = useState<Date>();
+  const [serverInfo, SetServerInfo] = useState<IServerInfo>();
 
   useEffect(() => {
     setClientNow(new Date());
-    const url = '/api/server-date';
-    axios.get(url)
-    .then((response) => {
-      console.log(response);
-      
-      // Use response.data to access the parsed JSON data
-      setServerNow(response.data.serverNow);
-    })
-  },[]);
-  
+    const url = InternalRelativeApi.ServerInfo;
+    axios.get(url).then((response) => {
+      SetServerInfo(response.data as IServerInfo);
+    });
+  }, []);
+
+  const dateOnTheServer = serverInfo
+    ? new Date(serverInfo.serverNowMs).toString()
+    : "";
 
   return (
     <>
@@ -28,9 +29,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <p>Z means UTC</p>
-        <p>The date on the server : {serverNow?.toString() ?? ""}</p>
+        <p>The date on the server : {dateOnTheServer}</p>
         <p>The date on the client : {clientNow?.toString() ?? ""}</p>
+        <p>Is sale day : {serverInfo?.isSalesDay.toString() ?? ""}</p>
       </main>
     </>
   );
