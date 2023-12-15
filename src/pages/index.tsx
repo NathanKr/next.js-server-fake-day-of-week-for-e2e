@@ -8,13 +8,15 @@ export default function Home() {
   const [clientNow, setClientNow] = useState<Date>();
   const [serverInfo, SetServerInfo] = useState<IServerInfo>();
 
-  useEffect(() => {
+  function getInfo() {
     setClientNow(new Date());
     const url = InternalRelativeApi.ServerInfo;
     axios.get(url).then((response) => {
       SetServerInfo(response.data as IServerInfo);
     });
-  }, []);
+  }
+
+  useEffect(getInfo, []);
 
   const dateOnTheServer = serverInfo
     ? new Date(serverInfo.serverNowMs).toString()
@@ -29,9 +31,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <button className="get-info" onClick={getInfo}>Get Info</button>
         <p>The date on the server : {dateOnTheServer}</p>
         <p>The date on the client : {clientNow?.toString() ?? ""}</p>
-        <p>Is sale day : {serverInfo?.isSalesDay.toString() ?? ""}</p>
+        <p>
+          Is sale day :{" "}
+          <span className="sale-day">
+            {serverInfo?.isSalesDay.toString() ?? ""}
+          </span>
+        </p>
       </main>
     </>
   );
