@@ -4,7 +4,7 @@ import axios from "axios";
 import IServerFakeTime from "@/types/i-server-fake-time";
 import InternalRelativeApi from "@/types/e-internal-relative-api";
 
-// --- make sure the ap is on http://localhost:3000
+// --- make sure the app is running on http://localhost:3000 via npm run dev
 
 let browser: Browser;
 

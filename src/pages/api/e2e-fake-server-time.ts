@@ -12,9 +12,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     const env = process.env.NODE_ENV;
     // -- we do not want this on production so protect production from mistakes ........
-    // --- todo nath ---> allow only url wwith locallahost
-    // if (env != "production" && req.url?.includes('localhost')) {
-    if (env != "production") {
+    const isLocalhost = req.headers.host?.includes("localhost");
+
+    if (env != "production" && isLocalhost) {
       sinon.restore(); // this is required otherwise you get an error on seting twice
       sinon.useFakeTimers({
         toFake: ["Date"],
