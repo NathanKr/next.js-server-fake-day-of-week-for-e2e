@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import IServerFakeTime from "@/types/i-server-fake-time";
+import { isProduction } from "@/utils/utils";
 import type { NextApiRequest, NextApiResponse } from "next";
 /* 
  use this import otherwise i get error from react thinking useFakeTimers is a custom hook
@@ -10,11 +11,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method == "POST") {
     const { serverFakeTimeMs } = req.body as IServerFakeTime;
 
-    const env = process.env.NODE_ENV;
     // -- we do not want this on production so protect production from mistakes ........
     const isLocalhost = req.headers.host?.includes("localhost");
 
-    if (env != "production" && isLocalhost) {
+    if (!isProduction() && isLocalhost) {
       sinon.restore(); // this is required otherwise you get an error on seting twice
       sinon.useFakeTimers({
         toFake: ["Date"],
